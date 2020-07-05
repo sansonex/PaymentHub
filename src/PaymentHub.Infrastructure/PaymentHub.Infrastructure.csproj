@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PaymentHub.Application\PaymentHub.Application.csproj" />
+    <ProjectReference Include="..\PaymentHub.Application\PaymentHub.Application.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,12 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\PaymentHub.Domain\PaymentHub.Domain.csproj" />
+    <Folder Include="Services\Boletos\" />
+    <Folder Include="Services\Transactions\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Boletos\" />
-    <Folder Include="Services\Transactions\Queries\" />
+    <ProjectReference Include="..\PaymentHub.Domain\PaymentHub.Domain.csproj" />
   </ItemGroup>
 
 </Project>

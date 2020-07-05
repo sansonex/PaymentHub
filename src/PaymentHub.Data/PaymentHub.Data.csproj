@@ -9,7 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PaymentHub.Application\PaymentHub.Application.csproj" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PaymentHub.Application\PaymentHub.Application.csproj" />
   </ItemGroup>
 
 </Project>

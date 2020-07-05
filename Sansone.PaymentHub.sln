@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentHub.Data", "src\Paym
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentHub.Domain", "src\PaymentHub.Domain\PaymentHub.Domain.csproj", "{64D7B760-58F6-4888-AD4D-A4390FC26162}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentHub.Application", "PaymentHub.Application\PaymentHub.Application.csproj", "{F107A3C8-80E8-41A5-8700-A74BAFC68FCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentHub.Application", "src\PaymentHub.Application\PaymentHub.Application.csproj", "{F107A3C8-80E8-41A5-8700-A74BAFC68FCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentHub.Tests", "tests\PaymentHub.Tests\PaymentHub.Tests.csproj", "{AAF55343-6F06-4279-8A61-A832109DF52A}"
 EndProject
