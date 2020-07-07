@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -10,6 +11,7 @@ using PaymentHub.Application.Interfaces;
 using PaymentHub.Application.Services.Transactions.Command;
 using PaymentHub.Core.Const;
 using PaymentHub.Core.Enum;
+using PaymentHub.Core.Exceptions;
 using PaymentHub.Domain;
 
 namespace PaymentHub.Application.Services
@@ -21,7 +23,7 @@ namespace PaymentHub.Application.Services
 		private readonly IMediator _mediator;
 		private readonly IMapper _mapper;
 
-		public BoletoService(IBoletoGatewayFactory boletoGatewayFactory,
+		private BoletoService(IBoletoGatewayFactory boletoGatewayFactory,
 			IPaymentHubContext context,
 			IMediator mediator,
 			IMapper mapper)
@@ -54,7 +56,9 @@ namespace PaymentHub.Application.Services
 			var configuration =
 				company.Configurations.FirstOrDefault(x => x.Key == ConfigurationKey.BoletoGatewayReference);
 
-			ValidateConfiguration(configuration);
+			if (string.IsNullOrWhiteSpace(configuration?.Value))
+				throw HubExceptionFactory.Create(HttpStatusCode.InternalServerError,
+												 $"Configuration invalid for {ConfigurationKey.BoletoGatewayReference}");
 
 			return MapGatewayBoletoConfigurationToEnum(configuration);
 		}
@@ -62,21 +66,12 @@ namespace PaymentHub.Application.Services
 		private EnumGatewayBoleto MapGatewayBoletoConfigurationToEnum(Configuration configuration)
 		{
 			if (!int.TryParse(configuration.Value, out var result))
-				throw new Exception();
+				throw HubExceptionFactory.Create(HttpStatusCode.InternalServerError, $"Invalid configuration");
 
 			if (!Enum.IsDefined(typeof(EnumGatewayBoleto), result))
-				throw new Exception();
+				throw HubExceptionFactory.Create(HttpStatusCode.InternalServerError, $"Invalid Configuration");
 
 			return (EnumGatewayBoleto)result;
-		}
-
-		private void ValidateConfiguration(Configuration configuration)
-		{
-			if (configuration == null)
-				throw new Exception();
-
-			if (string.IsNullOrWhiteSpace(configuration.Value))
-				throw new Exception();
 		}
 	}
 }

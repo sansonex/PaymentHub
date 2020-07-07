@@ -29,7 +29,7 @@ namespace PaymentHub.Application.Services.Transactions.Command
 		{
 			await _context.Transaction.InsertOneAsync((request.Transaction), cancellationToken: cancellationToken);
 
-			return await Task.FromResult(Unit.Value);
+			return await Task.FromResult(Unit.Value).ConfigureAwait(false);
 		}
 	}
 }
