@@ -8,6 +8,7 @@ using MediatR;
 using MongoDB.Driver;
 using PaymentHub.Application.DTOs;
 using PaymentHub.Application.Interfaces;
+using PaymentHub.Application.Services.Companies.Queries;
 using PaymentHub.Application.Services.Transactions.Command;
 using PaymentHub.Core.Const;
 using PaymentHub.Core.Enum;
@@ -36,7 +37,7 @@ namespace PaymentHub.Application.Services
 
 		public async Task<TransactionResponse> CreateBoletoAsync(BoletoRequest request, Guid companyId)
 		{
-			var company = await _context.Company.Find(x => x.Id == companyId).FirstOrDefaultAsync();
+			var company = await _mediator.Send(new GetCompanyById(companyId));
 
 			var gateway = GetGatewayBoleto(company);
 
